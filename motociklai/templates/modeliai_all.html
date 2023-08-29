@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Modeliu sąrašas:</h1>
+<ul>
+    {% for modelis_o in modelis_list %}
+        <li>{{ modelis_o.modelis }}, {{ modelis_o.gamitojasFK.pavadinimas }}</li>
+        <li><a href="{% url 'modelis-vienas-url' modelis_o.id %}">modelio linkas: </a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

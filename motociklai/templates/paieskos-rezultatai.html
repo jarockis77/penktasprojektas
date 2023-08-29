@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Paieskos fraze: {{ paieskos_tekstas_t }}</h1>
+{% if paieskos_rezultatai_t %}
+    {% for modelis_o in paieskos_rezultatai_t %}
+    <p> {{ modelis_o.modelis }}, {{ modelis_o.gamintojasFK.pavadinimas }}</p>
+    <p>
+        <a href="{% url 'modelis-vienas-url'  modelis_o.id %}">{{ modelis_o.modelis }}</a>
+
+        <a href="{% url 'gamintojas-vienas-url'  modelis_o.gamintojasFK.id %}">{{ modelis_o.gamintojasFK.pavadinimas }}</a>
+
+    </p>
+    {% endfor %}
+{% else %}
+    <p>Pagal jusu paieska nieko nerasta...</p>
+{% endif %}
+{% endblock %}

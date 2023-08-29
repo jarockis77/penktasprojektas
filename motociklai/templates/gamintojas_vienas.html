@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h4> {{ gamintojas_viena_eilute_t.pavadinimas }} {{ gamintojas_viena_eilute_t.metai }}</h4>
+<hr/>
+<p> aprasymas: {{ gamintojas_viena_eilute_t.aprasymas }} </p>
+<hr/>
+{% if gamintojas_viena_eilute_t.set.all %}
+<hr/>
+<p class="text-white bg-dark">Gamintojas{{ gamintojas_viena_eilute_t.pavadinimas }} turi siuos modelius:</p>
+    {% for gamintojas_o in gamintojas_viena_eilute_t.modelis_set.all %}
+        <p>{{ modelis_o.modelis }}, metai: {{ modelis_o.metai }}</p>
+        <hr/>
+{% endfor %}
+{% else %}
+    <p>tratataiku nerasta...</p>
+{% endif %}
+{% endblock %}
