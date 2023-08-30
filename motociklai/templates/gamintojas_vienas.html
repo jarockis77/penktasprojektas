@@ -5,14 +5,13 @@
 <hr/>
 <p> aprasymas: {{ gamintojas_viena_eilute_t.aprasymas }} </p>
 <hr/>
-{% if gamintojas_viena_eilute_t.set.all %}
-<hr/>
+{% if gamintojas_viena_eilute_t.modelis.set.all %}
+
 <p class="text-white bg-dark">Gamintojas{{ gamintojas_viena_eilute_t.pavadinimas }} turi siuos modelius:</p>
     {% for gamintojas_o in gamintojas_viena_eilute_t.modelis_set.all %}
-        <p>{{ modelis_o.modelis }}, metai: {{ modelis_o.metai }}</p>
+        <p>{{ modelis_o.modelis }}, metai: {{ modelis_o.metai_pasirode }}</p>
         <hr/>
-{% endfor %}
-{% else %}
-    <p>tratataiku nerasta...</p>
+    {% endfor %}
+
 {% endif %}
 {% endblock %}

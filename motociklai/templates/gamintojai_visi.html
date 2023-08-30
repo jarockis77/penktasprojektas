@@ -5,7 +5,8 @@
 <p>Mūsų gamintoju sąrašas:</p>
 <ul>
     {% for gamintojas_o in gamintojai_visos_eilutes_t %}
-        <li><a href="{% url 'gamintojas-vienas-url' gamintojas_o.id %}">{{ gamintojas_o.pavadinimas }}</a></li>
+        <li><a href="{% url 'gamintojas-vienas-url' gamintojas_o.id %}">{{ gamintojas_o.pavadinimas }}
+        {{ gamintojas_o.gaminimo_pradzia }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
