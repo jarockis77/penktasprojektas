@@ -3,19 +3,23 @@ from django.shortcuts import render, get_object_or_404
 # from django.http import HttpResponse
 from django.views import generic
 from django.db.models import Q
-from .models import Gamintojas, Modelis
+
+
+from .models import Gamintojas, Modelis, Likutis, ModelisInstance
 # Create your views here.
 
 
 def index(request):
-    num_gamintojas = Gamintojas.objects.all().count()
-
-    num_modelis = Modelis.objects.count()
+    num_gamintoju = Gamintojas.objects.all().count()
+    num_instances = ModelisInstance.objects.all().count()
+    num_modeliu = Modelis.objects.count()
+    num_instances_available = ModelisInstance.objects.filter(status__exact='t').count()
 
     context_t = {
-        'num_gamintojas_t': num_gamintojas,
-
-        'num_modelis_t': num_modelis,
+        'num_gamintojas_t': num_gamintoju,
+        'num_instances_t': num_instances,
+        'num_modelis_t': num_modeliu,
+        'num_instances_available_t': num_instances_available,
     }
 
     return render(request, 'index.html', context=context_t)

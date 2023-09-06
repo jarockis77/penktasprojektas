@@ -17,7 +17,7 @@ class Gamintojas(models.Model):
         return f"{self.pavadinimas} - {self.gaminimo_pradzia}"
 
     def display_modeliai(self):
-        return ',  '.join(modelis.modelis    for modelis in self.modeliai.all()[:3])
+        return ',  '.join(modelis.modelis for modelis in self.modeliai.all()[:3])
 
     display_modeliai.short_description = "Modeliai"
 

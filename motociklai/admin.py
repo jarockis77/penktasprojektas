@@ -9,12 +9,15 @@ class ModeliaiInstanceInline(admin.TabularInline):
 @admin.register(Modelis)
 class ModelisAdmin(admin.ModelAdmin):
     list_display = ('modelis', 'gamintojas', 'display_likutis')
+    search_fields = ('modelis', 'gamintojas__pavadinimas')
     inlines = [ModeliaiInstanceInline]
 
 @admin.register(ModelisInstance)
 class LikutisInstanceAdmin(admin.ModelAdmin):
     list_display = ('modelis', 'id', 'status', 'planuojama_gauti')
+    list_editable = ('status', 'planuojama_gauti')
     list_filter = ('status', 'planuojama_gauti')
+    search_fields = ('id', 'modelis__modelis')
 
     fieldsets = (
         ('General', {'fields': ('id', 'modelis')}),
