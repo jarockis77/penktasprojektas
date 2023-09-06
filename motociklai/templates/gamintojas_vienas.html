@@ -5,13 +5,10 @@
 <hr/>
 <p> aprasymas: {{ gamintojas_viena_eilute_t.aprasymas }} </p>
 <hr/>
-{% if gamintojas_viena_eilute_t.modelis.set.all %}
+<h5>Mes turime {{ gamintojas_viena_eilute_t.pavadinimas }} {{ gamintojas_viena_eilute_t.metai }} modelius:</h5>
+{% for motociklas in gamintojas_viena_eilute_t.motociklai.all %}
+    <li>{{ book.title }}</li>
+{% endfor %}
 
-<p class="text-white bg-dark">Gamintojas{{ gamintojas_viena_eilute_t.pavadinimas }} turi siuos modelius:</p>
-    {% for gamintojas_o in gamintojas_viena_eilute_t.modelis_set.all %}
-        <p>{{ modelis_o.modelis }}, metai: {{ modelis_o.metai_pasirode }}</p>
-        <hr/>
-    {% endfor %}
 
-{% endif %}
 {% endblock %}
