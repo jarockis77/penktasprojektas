@@ -16,6 +16,10 @@ class Gamintojas(models.Model):
     def __str__(self):
         return f"{self.pavadinimas} - {self.gaminimo_pradzia}"
 
+    def display_modeliai(self):
+        return ',  '.join(modelis.modelis    for modelis in self.modeliai.all()[:3])
+
+    display_modeliai.short_description = "Modeliai"
 
 
 
@@ -24,8 +28,10 @@ class Modelis(models.Model):
     modelis = models.CharField('Modelis', max_length=50)
     metai_pasirode = models.IntegerField('Gaminimo-pradzia')
     aprasymas = models.TextField('Aprasymas', max_length=3000)
-    gamintojas = models.ForeignKey('Gamintojas', on_delete=models.SET_NULL, null=True)
+    gamintojas = models.ForeignKey('Gamintojas', on_delete=models.SET_NULL, null=True, related_name='modeliai')
     likutis = models.ManyToManyField('Likutis', help_text="Isrinkite likucio bukle")
+
+
 
     class Meta:
         verbose_name = 'Modelis'
@@ -34,6 +40,10 @@ class Modelis(models.Model):
     def __str__(self):
         return f"{self.modelis}  --  {self.metai_pasirode}"
 
+    def display_likutis(self):
+        return ',  '.join(likutis.name for likutis in self.likutis.all()[:2])
+
+    display_likutis.short_description = "Likutis"
 
 
 class Likutis(models.Model):
@@ -73,4 +83,5 @@ class ModelisInstance(models.Model):
         ordering = ['planuojama_gauti']
 
     def __str__(self):
-        return f"{self.id} -- {self.modelis.modelis} -- {self.modelis.gamintojas}"
+        #return f"{self.id} -- {self.modelis.modelis} -- {self.modelis.gamintojas}"
+        return f"{self.id}"
