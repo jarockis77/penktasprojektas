@@ -12,7 +12,7 @@
 
 <div>
     {% if gamintojai_t.has_other_pages %}
-    <ul class="pagination pagination-sm justify-content-end">
+    <ul class="pagination pagination-sm justify-content-center">
         {% for nr in gamintojai_t.paginator.page_range %}
             {% if gamintojai_t.number == nr %}
                 <li class="page-item active">
