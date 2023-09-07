@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Modeliu sąrašas:</h1>
+{% if modelis_list %}
+<ul>
+    {% for modelis in modelis_list %}
+        <li><a href="{% url 'modelis-vienas-url' modelis.id %}"> {{ modelis.modelis }} </a> - {{modelis.gamintojas}}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Tokiu modeliu neturime...</p>
+{% endif %}
+{% endblock %}

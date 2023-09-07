@@ -4,11 +4,11 @@
 <h1>Gamintojai</h1>
 <p>Mūsų gamintoju sąrašas:</p>
 <ul>
-    {% for gamintojas_o in gamintojai_visos_eilutes_t %}
-        <li><a href="{% url 'gamintojas-vienas-url' gamintojas_o.id %}">{{ gamintojas_o.pavadinimas }}
-        {{ gamintojas_o.gaminimo_pradzia }}</a></li>
+    {% for gamintojas in gamintojai_visos_eilutes_t %}
+        <li><a href="{% url 'gamintojas-vienas-url' gamintojas.id %}">{{ gamintojas.pavadinimas }} -
+        {{ gamintojas.gaminimo_pradzia }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
 
-{#{% url 'gamintojas-vienas-url' gamintojas_o.id %}#}
+{#{% url 'gamintojas-vienas-url' gamintojas.id %}#}

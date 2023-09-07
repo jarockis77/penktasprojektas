@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('modelis', models.CharField(max_length=50, verbose_name='Modelis')),
                 ('metai_pasirode', models.IntegerField(verbose_name='Gaminimo-pradzia')),
-                ('aprasymas', models.TextField(max_length=2000, verbose_name='Aprasymas')),
+                ('aprasymas', models.TextField(max_length=2000, verbose_name='Modelio-Aprasymas')),
                 ('gamintojasFK', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='motociklai.gamintojas')),
             ],
         ),

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{modelis.modelis}}</h1>
+<p class="text-light bg-warning">{{ modelis.gamintojas }}</p>
+<p><a href="{% url 'modelis-vienas-url' modelis.id %}"></a><p><strong>Aprasymas:
+</strong></p> {{ modelis.modelis_aprasymas }}</p>
+<p><strong>Likutis:</strong> {{ modelis.likutis.all|join:", " }}</p>
+<hr/>
+
+<h4>Modeliu vienetai:</h4>
+{% endblock %}

@@ -27,7 +27,7 @@ class Gamintojas(models.Model):
 class Modelis(models.Model):
     modelis = models.CharField('Modelis', max_length=50)
     metai_pasirode = models.IntegerField('Gaminimo-pradzia')
-    aprasymas = models.TextField('Aprasymas', max_length=3000)
+    modelis_aprasymas = models.TextField('aprasymas', max_length=3000, null=True)
     gamintojas = models.ForeignKey('Gamintojas', on_delete=models.SET_NULL, null=True, related_name='modeliai')
     likutis = models.ManyToManyField('Likutis', help_text="Isrinkite likucio bukle")
 

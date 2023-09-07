@@ -43,12 +43,12 @@ def gamintojas(request, gamintojas_id):
 class ModelisListView(generic.ListView):# ListView - visos eilutes is lenteles(objektai)
     model = Modelis #modelio klase_list --> book_list pasidaro pistoletiskai
     context_object_name = 'modelis_list' #nereikalingas jei nekeiciam pavadinimo
-    template_name = 'modeliai_all.html'
+    template_name = 'modeliai_list.html'
 
 class ModelisDetailView(generic.DetailView):
     model = Modelis
     context_object_name = 'modelis'
-    template_name = 'modelis_vienas.html'
+    template_name = 'modelis_detail.html'
 
 def search(request):
     paieskos_tekstas = request.GET.get('search_text')
