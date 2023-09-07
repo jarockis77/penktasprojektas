@@ -10,8 +10,8 @@
 {% if modelis.modelisinstance_set.all %}
 <h4>Modeliu vienetai:</h4>
     {% for copy in modelis.modelisinstance_set.all %}
-    <p>Planuojamas parvezimas:  {{ copy.planuojama_gauti }}</p>
-    <p>Nr: {{ copy.id }}</p>
+<p><strong>Planuojamas parvezimas:  </strong>{{ copy.planuojama_gauti }}</p>
+<p><strong>Nr: </strong>{{ copy.id }}</p>
     <p class="{% if copy.status == 'n' %} text-danger
               {% elif copy.status == 't' %} text-success
               {% elif copy.status == 'r' %} text-muted

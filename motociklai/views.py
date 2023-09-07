@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 # from django.http import HttpResponse
 from django.views import generic
 from django.db.models import Q
-
+from django.core.paginator import Paginator
 
 from .models import Gamintojas, Modelis, Likutis, ModelisInstance
 # Create your views here.
@@ -24,14 +24,16 @@ def index(request):
 
     return render(request, 'index.html', context=context_t)
 
+
+
 def gamintojai(request):
-    gamintojai_visos_eilutes = Gamintojas.objects.all()
-    # print(authors)
+    paginator = Paginator(Gamintojas.objects.all(), 2)
+    page_number = request.GET.get('page')
+    paged_gamintojai = paginator.get_page(page_number)
     context_t = {
-        'gamintojai_visos_eilutes_t': gamintojai_visos_eilutes
+        'gamintojai_t': paged_gamintojai
     }
     return render(request, 'gamintojai_visi.html', context=context_t)
-
 
 def gamintojas(request, gamintojas_id):
     gamintojas_viena_eilute = get_object_or_404(Gamintojas, pk=gamintojas_id)
@@ -44,6 +46,7 @@ class ModelisListView(generic.ListView):# ListView - visos eilutes is lenteles(o
     model = Modelis #modelio klase_list --> book_list pasidaro pistoletiskai
     context_object_name = 'modelis_list' #nereikalingas jei nekeiciam pavadinimo
     template_name = 'modeliai_list.html'
+    paginate_by = 3
 
 class ModelisDetailView(generic.DetailView):
     model = Modelis
@@ -55,6 +58,7 @@ def search(request):
     paieskos_rezultatai = Modelis.objects.filter(
         Q(modelis__icontains=paieskos_tekstas) |
         Q(gamintojas__pavadinimas__icontains=paieskos_tekstas)
+
     )
 
     context_t = {

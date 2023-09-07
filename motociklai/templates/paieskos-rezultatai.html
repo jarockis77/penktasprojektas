@@ -3,12 +3,12 @@
 {% block content %}
 <h1>Paieskos fraze: {{ paieskos_tekstas_t }}</h1>
 {% if paieskos_rezultatai_t %}
-    {% for modelis_o in paieskos_rezultatai_t %}
+    {% for modelis in paieskos_rezultatai_t %}
 
     <p>
-        <a href="{% url 'modelis-vienas-url'  modelis_o.id %}">{{ modelis_o.modelis }}</a>
+        <a href="{% url 'modelis-vienas-url'  modelis.id %}">{{ modelis.modelis }}</a>
 
-        <a href="{% url 'gamintojas-vienas-url'  modelis_o.gamintojas.id %}"> -- {{ modelis_o.gamintojas.pavadinimas }}</a>
+        <a href="{% url 'gamintojas-vienas-url'  modelis.gamintojas.id %}"> -- {{ modelis.gamintojas.pavadinimas }}</a>
 
     </p>
     {% endfor %}

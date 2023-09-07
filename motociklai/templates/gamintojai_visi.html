@@ -4,11 +4,31 @@
 <h1>Gamintojai</h1>
 <p>Mūsų gamintoju sąrašas:</p>
 <ul>
-    {% for gamintojas in gamintojai_visos_eilutes_t %}
+    {% for gamintojas in gamintojai_t %}
         <li><a href="{% url 'gamintojas-vienas-url' gamintojas.id %}">{{ gamintojas.pavadinimas }} -
         {{ gamintojas.gaminimo_pradzia }}</a></li>
     {% endfor %}
 </ul>
+
+<div>
+    {% if gamintojai_t.has_other_pages %}
+    <ul class="pagination pagination-sm justify-content-end">
+        {% for nr in gamintojai_t.paginator.page_range %}
+            {% if gamintojai_t.number == nr %}
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{ nr }}">{{ nr }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ nr }}">{{ nr }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+
+    </ul>
+
+</div>
 {% endblock %}
 
-{#{% url 'gamintojas-vienas-url' gamintojas.id %}#}

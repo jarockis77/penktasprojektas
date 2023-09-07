@@ -41,7 +41,7 @@ class Modelis(models.Model):
         return f"{self.modelis}  --  {self.metai_pasirode}"
 
     def display_likutis(self):
-        return ',  '.join(likutis.name for likutis in self.likutis.all()[:2])
+        return ',  '.join(likutis.name for likutis in self.likutis.all()[:3])
 
     display_likutis.short_description = "Likutis"
 
