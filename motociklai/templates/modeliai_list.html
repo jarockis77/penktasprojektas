@@ -1,32 +1,44 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>Modeliu sąrašas:</h1>
-{% if modelis_list %}
-<ul>
-    {% for modelis in modelis_list %}
-        <li><a href="{% url 'modelis-vienas-url' modelis.id %}"> {{ modelis.modelis }} </a> - {{modelis.gamintojas}}</li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>Tokiu modeliu neturime...</p>
-{% endif %}
+{% load static %}
 <div class="pagination">
-    <span class="step-link">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; pirmas</a>
-            <a href="?page={{ page_obj.previous_page_number }}">atgal</a>
-        {% endif %}
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">&laquo pirmas</a>
+    <a href="?page={{ page_obj.previous_page_number }}">atgal</a>
+    {% endif %}
 
-        <span class="current">
-            {{ page_obj.number }} iš {{ page_obj.paginator.num_pages }}
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">pirmyn</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">paskutinis &raquo;</a>
-        {% endif %}
+    <span class="current">
+      {{ page_obj.number }} iš {{ page_obj.paginator.num_pages }}
     </span>
 
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">pirmyn</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">paskutinis &raquo;</a>
+    {% endif %}
+  </span>
 </div>
+
+<h1>Modeliu sarašas:</h1>
+{% if modelis_list %}
+<div class="row">
+    {% for modelis_o in modelis_list %}
+    <div class="col-sm-6 col-md-3 d-flex align-items-stretch">
+        <div class="card mb-4 shadow-sm">
+            {% if modelis_o.cover %}
+            <img src="{{ modelis_o.cover.url }}" class="card-img-top">
+            {% else %}
+            <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">{{ modelis_o.gamintojas }}</h6>
+                <p class="card-text"><a href="{% url 'modelis-vienas-url' modelis_o.id %}">{{ modelis_o.modelis }}</a></p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>Bibliotekoje knygų nėra.</p>
+{% endif %}
 {% endblock %}

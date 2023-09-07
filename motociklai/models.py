@@ -30,7 +30,7 @@ class Modelis(models.Model):
     modelis_aprasymas = models.TextField('Aprasymas', max_length=3000, null=True)
     gamintojas = models.ForeignKey('Gamintojas', on_delete=models.SET_NULL, null=True, related_name='modeliai')
     likutis = models.ManyToManyField('Likutis', help_text="Isrinkite likucio bukle")
-    cover =  models.ImageField("Virselis", upload_to="covers", null=True)
+    cover =  models.ImageField('Virselis', upload_to='covers', null=True, blank=True)
 
 
     class Meta:
