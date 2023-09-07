@@ -7,6 +7,21 @@
 </strong></p> {{ modelis.modelis_aprasymas }}</p>
 <p><strong>Likutis:</strong> {{ modelis.likutis.all|join:", " }}</p>
 <hr/>
-
+{% if modelis.modelisinstance_set.all %}
 <h4>Modeliu vienetai:</h4>
+    {% for copy in modelis.modelisinstance_set.all %}
+    <p>Planuojamas parvezimas:  {{ copy.planuojama_gauti }}</p>
+    <p>Nr: {{ copy.id }}</p>
+    <p class="{% if copy.status == 'n' %} text-danger
+              {% elif copy.status == 't' %} text-success
+              {% elif copy.status == 'r' %} text-muted
+              {% else %} text-warning
+              {% endif %}">
+        <strong>{{ copy.get_status_display }}</strong></p>
+
+
+    {% endfor %}
+{% else %}
+    <p>Kolkas tokio modelio neturime... </p>
+{% endif %}
 {% endblock %}

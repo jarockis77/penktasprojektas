@@ -54,7 +54,7 @@ def search(request):
     paieskos_tekstas = request.GET.get('search_text')
     paieskos_rezultatai = Modelis.objects.filter(
         Q(modelis__icontains=paieskos_tekstas) |
-        Q(gamintojasFK__pavadinimas__icontains=paieskos_tekstas)
+        Q(gamintojas__pavadinimas__icontains=paieskos_tekstas)
     )
 
     context_t = {

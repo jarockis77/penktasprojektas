@@ -61,7 +61,7 @@ class Likutis(models.Model):
 
 class ModelisInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    modelis = models.ForeignKey('Modelis', on_delete=models.CASCADE)
+    modelis = models.ForeignKey('Modelis', on_delete=models.CASCADE, related_name='modelisinstance_set')
     planuojama_gauti = models.DateField('Turesime pardavime', null=True, blank=True )
 
     LIKUCIU_STATUS = (
@@ -75,7 +75,7 @@ class ModelisInstance(models.Model):
         max_length=1,
         choices = LIKUCIU_STATUS,
         blank = True,
-        default="a",
+        default='a',
         help_text='Moto statusas'
     )
 
