@@ -15,12 +15,20 @@ def index(request):
     num_modeliu = Modelis.objects.count()
     num_instances_available = ModelisInstance.objects.filter(status__exact='t').count()
 
+    username = request.user
+
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+
+
     context_t = {
         'num_gamintojas_t': num_gamintoju,
         'num_instances_t': num_instances,
         'num_modelis_t': num_modeliu,
         'num_instances_available_t': num_instances_available,
-    }
+        'username_t': username,
+        'num_visits_t': num_visits
+            }
 
     return render(request, 'index.html', context=context_t)
 
