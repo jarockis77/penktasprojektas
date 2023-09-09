@@ -29,6 +29,7 @@ urlpatterns = [
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
-    path('motociklai/accounts/', include('django.contrib.auth.urls'))
+    path('motociklai/accounts/', include('django.contrib.auth.urls')),
+    path('motociklai/accounts/login', include('django.contrib.auth.urls'))
 ]
 
