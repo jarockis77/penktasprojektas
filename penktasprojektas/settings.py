@@ -129,3 +129,18 @@ MEDIA_URL ='/media/'
 
 LOGIN_REDIRECT_URL = '/'
 
+# settingas testavimui - rezultatas terminale
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+from .secret import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+EMAIL_HOST = EMAIL_HOST
+EMAIL_PORT = EMAIL_PORT
+EMAIL_SMTP_PORT = EMAIL_PORT
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = EMAIL_HOST_USER
+# el. pašto adresas iš kurio siųsite
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
