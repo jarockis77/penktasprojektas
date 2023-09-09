@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 
+from datetime import date
 import uuid
 # Create your models here.
 
@@ -78,6 +80,9 @@ class ModelisInstance(models.Model):
         default='a',
         help_text='Moto statusas'
     )
+
+    klientas = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
 
     class Meta:
         ordering = ['planuojama_gauti']

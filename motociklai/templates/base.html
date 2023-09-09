@@ -69,6 +69,7 @@
         >
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
@@ -83,7 +84,7 @@
                         7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
                     </svg>
                     {{ user.get_username }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Mano knygos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'mano-uzsakymai' %}">Mano uzsakymai</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Atsijungti</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Prisijungti</a></li>
@@ -95,6 +96,7 @@
 
 
                 <li class="nav-item"><a class="nav-link" href="{% url 'index-url' %}">Pradžia</a></li>
+
                 <li class="nav-item"><a class="nav-link" href="{% url 'gamintojai-visi-url' %}">Gamintojai</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'modeliai-all-url' %}">Modeliai</a></li>
             </ul>
@@ -114,6 +116,7 @@
                 <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
                     Ieškoti
                 </button>
+
             </form>
         </div>
     </div>

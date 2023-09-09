@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Mano uzsakymai </h1>
+{% if modelisinstance_list %}
+<ul>
+    {% for modelis_o in modelisinstance_list %}
+        <li>{{ modelis_o.modelis }}  {{ modelis_ometai_pasirode}}</li>
+    {% endfor%}
+</ul>
+{% else %}
+    <p>Siuo metu uzsakymu neturite </p>
+{% endif %}
+
+
+
+
+
+{% endblock %}

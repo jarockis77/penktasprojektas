@@ -12,16 +12,18 @@ class ModelisAdmin(admin.ModelAdmin):
     search_fields = ('modelis', 'gamintojas__pavadinimas')
     inlines = [ModeliaiInstanceInline]
 
+
+
 @admin.register(ModelisInstance)
 class LikutisInstanceAdmin(admin.ModelAdmin):
-    list_display = ('modelis', 'id', 'status', 'planuojama_gauti')
-    list_editable = ('status', 'planuojama_gauti')
+    list_display = ('modelis', 'id', 'status', 'planuojama_gauti', 'klientas')
+    list_editable = ('status', 'planuojama_gauti',  'klientas',)
     list_filter = ('status', 'planuojama_gauti')
     search_fields = ('id', 'modelis__modelis')
 
     fieldsets = (
         ('General', {'fields': ('id', 'modelis')}),
-        ('Aavailability', {'fields': ('status', 'planuojama_gauti')}),
+        ('Aavailability', {'fields': ('status', 'planuojama_gauti','klientas',)}),
     )
 
 @admin.register(Gamintojas)

@@ -6,6 +6,8 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 
 from .models import Gamintojas, Modelis, Likutis, ModelisInstance
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 
 
@@ -74,3 +76,11 @@ def search(request):
         'paieskos_rezultatai_t': paieskos_rezultatai
     }
     return render(request, 'paieskos-rezultatai.html', context=context_t)
+
+class UzsakymaiByUserListView(LoginRequiredMixin, generic.list.ListView):
+    model = ModelisInstance
+    template_name = "mano-uzsakymai.html"
+    context_object_name = 'modelisinstance_list'
+
+    def  get_queryset(self):
+        return ModelisInstance.objects.filter(klientas=self.request.user)
