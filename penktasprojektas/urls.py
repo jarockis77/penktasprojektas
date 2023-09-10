@@ -24,12 +24,13 @@ assert isinstance(settings.MEDIA_ROOT, object)
 urlpatterns = [
     path('motociklai/', include('motociklai.urls')),
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url="motociklai/", permanent=True))
+    path('', RedirectView.as_view(url="motociklai/", permanent=True)),
+    path('tinymce/', include('tinymce.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
-    path('motociklai/accounts/', include('django.contrib.auth.urls')),
-    path('motociklai/accounts/login', include('django.contrib.auth.urls'))
+    path('motociklai/accounts/', include('django.contrib.auth.urls'))
 ]
+
 

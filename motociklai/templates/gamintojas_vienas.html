@@ -3,7 +3,7 @@
 {% block content %}
 <h4> {{ gamintojas_viena_eilute_t.pavadinimas }} - {{ gamintojas_viena_eilute_t.metai }}</h4>
 <hr/>
-<p> Aprasymas: {{ gamintojas_viena_eilute_t.aprasymas }} </p>
+<p> Aprasymas: {{ gamintojas_viena_eilute_t.aprasymas | safe }} </p>
 <hr/>
 <h5>Mes turime {{ gamintojas_viena_eilute_t.pavadinimas }} modelius:</h5>
 {% for modelis in gamintojas_viena_eilute_t.modeliai.all %}

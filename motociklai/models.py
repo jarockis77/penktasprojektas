@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
+
 
 from datetime import date
 import uuid
@@ -90,3 +92,4 @@ class ModelisInstance(models.Model):
     def __str__(self):
         #return f"{self.id} -- {self.modelis.modelis} -- {self.modelis.gamintojas}"
         return f"{self.id}"
+

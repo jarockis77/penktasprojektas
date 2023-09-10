@@ -1,11 +1,21 @@
 {% extends "base.html" %}
+
 {% block content %}
 <h1>Mano uzsakymai </h1>
 {% if modelisinstance_list %}
 <ul>
     {% for modelis_o in modelisinstance_list %}
-        <li>{{ modelis_o.modelis }}  {{ modelis_ometai_pasirode}}</li>
+        <li>{{ modelis_o.modelis }}  --  <strong>{{ modelis_o.modelis.gamintojas }}</strong></li>
     {% endfor%}
+
+            <li class="{% if modelis_o.is_overdue %}text-danger{% endif %}">
+            <a href="{% url 'book-one' bookinst_o.book.id %}">
+             {{ bookinst_o.id }} {{ bookinst_o.book }} {{ bookinst_o.book.author }} </a>
+            {{ bookinst_o.due_back }}
+        </li>
+
+
+
 </ul>
 {% else %}
     <p>Siuo metu uzsakymu neturite </p>
