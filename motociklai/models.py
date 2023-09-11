@@ -5,12 +5,13 @@ from tinymce.models import HTMLField
 
 from datetime import date
 import uuid
+from PIL import Image
 # Create your models here.
 
 class Gamintojas(models.Model):
     pavadinimas = models.CharField('Pavadinimas', max_length=50)
-    gaminimo_pradzia = models.IntegerField('Pradejo-gaminti')
-    aprasymas = models.TextField('About', max_length=3000)
+    gaminimo_pradzia = models.IntegerField('Pradejo-gaminti', max_length=20)
+    aprasymas = HTMLField()
 
     class Meta:
         verbose_name = 'Gamintojas'
@@ -103,3 +104,22 @@ class ModelisReview(models.Model):
     def __str__(self):
         return self.content
 
+
+class Profilis(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
+    nuotrauka = models.ImageField(default='no-image.png', upload_to='profile_pics')
+
+    def __str__(self):
+        return f"{self.user.username} profilis"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.nuotrauka.path)
+        if (img.height > 300) or (img.width > 300):
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.nuotrauka.path)
+
+    class Meta:
+        verbose_name = 'Profilis'
+        verbose_name_plural = 'Profiliai'

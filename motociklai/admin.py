@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Gamintojas, Modelis, Likutis, ModelisInstance, ModelisReview
+from .models import Gamintojas, Modelis, Likutis, ModelisInstance, ModelisReview, Profilis
 
 class ModeliaiInstanceInline(admin.TabularInline):
     model = ModelisInstance
@@ -40,4 +40,5 @@ class ModelisReviewAdmin(admin.ModelAdmin):
 #admin.site.register(Gamintojas)
 #admin.site.register(Modelis, ModelisAdmin)
 admin.site.register(Likutis)
+admin.site.register(Profilis)
 #admin.site.register(ModelisInstance, LikutisInstanceAdmin)

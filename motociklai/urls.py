@@ -10,5 +10,6 @@ urlpatterns = [
     path('modeliai/<int:pk>', views.ModelisDetailView.as_view(), name='modelis-vienas-url'),
     path('search/', views.search, name='search-url'),
     path('mano_uzsakymai', views.UzsakymaiByUserListView.as_view(), name='mano-uzsakymai'),
-    path('register/', views.register, name='register-url')
+    path('register/', views.register, name='register-url'),
+    path('profilis/', views.profilis, name = 'profilis-url'),
 ]

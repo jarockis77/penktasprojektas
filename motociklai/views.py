@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-# from django.http import HttpResponse
+#from django.http import HttpResponse
 from django.views import generic
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from .forms import ModelisReviewForm
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -140,3 +140,8 @@ def register(request):
 
     else:
         return render(request, "registration/registration.html")
+
+
+@login_required
+def profilis(request):
+    return render(request, 'profilis.html')
