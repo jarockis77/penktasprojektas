@@ -8,13 +8,9 @@
         <li>{{ modelis_o.modelis }}  --  <strong>{{ modelis_o.modelis.gamintojas }}</strong></li>
     {% endfor%}
 
-            <li class="{% if modelis_o.is_overdue %}text-danger{% endif %}">
-            <a href="{% url 'book-one' bookinst_o.book.id %}">
-             {{ bookinst_o.id }} {{ bookinst_o.book }} {{ bookinst_o.book.author }} </a>
-            {{ bookinst_o.due_back }}
-        </li>
 
 
+    </li>
 
 </ul>
 {% else %}

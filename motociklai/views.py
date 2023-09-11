@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 # from django.http import HttpResponse
 from django.views import generic
 from django.db.models import Q
@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-
+from .forms import ModelisReviewForm
 
 # Create your views here.
 
@@ -62,10 +62,32 @@ class ModelisListView(generic.ListView):
     paginate_by = 3
 
 
-class ModelisDetailView(generic.DetailView):
+class ModelisDetailView(generic.edit.FormMixin, generic.DetailView):
     model = Modelis
     context_object_name = 'modelis'
     template_name = 'modelis_detail.html'
+    form_class = ModelisReviewForm
+
+    def get_success_url(self):
+        return reverse('modelis-vienas-url', kwargs={'pk': self.object.id})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.modelis = self.object
+        form.instance.reviewer = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+
+
 
 
 def search(request):

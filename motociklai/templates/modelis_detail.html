@@ -25,4 +25,28 @@
 {% else %}
     <p>Kolkas tokio modelio neturime... </p>
 {% endif %}
+<hr/>
+{% if user.is_authenticated %}
+<div class="fieldWrapper">
+    <h4>Palikite atsiliepima:</h4>
+    <form action="", method="post">
+        {% csrf_token %}
+        {{ form.content }}
+        <input type="submit" value="Issaugoti">
+    </form>
+</div>
+{% endif %}
+
+<hr/>
+<h4>Atsiliepimai: </h4>
+    {% if modelis.modelisreview_set.all %}
+        {% for review_o in modelis.modelisreview_set.all %}
+            <hr/>
+            <p>{{ review_o.reviewer }} - {{ review_o.date_created }}</p>
+            <p>{{ review_o.content }}</p>
+        {% endfor %}
+    {% else %}
+        <p>modelis atsiliepimu neturi...</p>
+    {% endif %}
+
 {% endblock %}

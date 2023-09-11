@@ -93,3 +93,13 @@ class ModelisInstance(models.Model):
         #return f"{self.id} -- {self.modelis.modelis} -- {self.modelis.gamintojas}"
         return f"{self.id}"
 
+class ModelisReview(models.Model):
+    content = models.TextField('Atsiliepimas', max_length=2000)
+    date_created = models.DateTimeField(auto_now_add=True)
+    modelis = models.ForeignKey(Modelis, on_delete=models.CASCADE, related_name='modelisreview_set', blank=True)
+    reviewer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+
+    def __str__(self):
+        return self.content
+

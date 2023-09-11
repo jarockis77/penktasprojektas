@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Gamintojas, Modelis, Likutis, ModelisInstance
+from .models import Gamintojas, Modelis, Likutis, ModelisInstance, ModelisReview
 
 class ModeliaiInstanceInline(admin.TabularInline):
     model = ModelisInstance
@@ -29,6 +29,12 @@ class LikutisInstanceAdmin(admin.ModelAdmin):
 @admin.register(Gamintojas)
 class GamintojasAdmin(admin.ModelAdmin):
     list_display = ('pavadinimas', 'gaminimo_pradzia', 'display_modeliai')
+
+@admin.register(ModelisReview)
+class ModelisReviewAdmin(admin.ModelAdmin):
+    list_display = ('modelis', 'date_created', 'reviewer', 'content')
+
+
 
 
 #admin.site.register(Gamintojas)
