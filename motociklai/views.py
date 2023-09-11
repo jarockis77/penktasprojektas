@@ -147,6 +147,14 @@ def profilis(request):
     if request.method == "GET":
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfilisUpdateForm(instance=request.user.profilis)
+    elif request.method == "POST":
+        u_form = UserUpdateForm(request.POST,instance=request.user)
+        p_form = ProfilisUpdateForm(request.POST, request.FILES, instance=request.user.profilis)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, ("Your profile was updated"))
+            return redirect('profilis-url')
 
     context_t = {
         'u_form': u_form,
