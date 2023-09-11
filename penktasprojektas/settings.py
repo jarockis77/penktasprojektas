@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'motociklai',
+    'motociklai.apps.MotociklaiConfig',
     'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
