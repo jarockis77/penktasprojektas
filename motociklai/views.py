@@ -3,14 +3,14 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import generic
 from django.db.models import Q
 from django.core.paginator import Paginator
-
-from .models import Gamintojas, Modelis, Likutis, ModelisInstance
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-from .forms import ModelisReviewForm
 from django.contrib.auth.decorators import login_required
+
+from .models import Gamintojas, Modelis, Likutis, ModelisInstance
+from .forms import ModelisReviewForm, UserUpdateForm, ProfilisUpdateForm
 # Create your views here.
 
 
@@ -144,4 +144,12 @@ def register(request):
 
 @login_required
 def profilis(request):
-    return render(request, 'profilis.html')
+    if request.method == "GET":
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfilisUpdateForm(instance=request.user.profilis)
+
+    context_t = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'profilis.html', context=context_t)
