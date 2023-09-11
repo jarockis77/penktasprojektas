@@ -86,6 +86,12 @@ class ModelisInstance(models.Model):
 
     klientas = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
+    @property
+    def is_overdue(self):
+        if self.due_back and date.today() > self.due_back:
+            return True
+        else:
+            return False
 
     class Meta:
         ordering = ['planuojama_gauti']

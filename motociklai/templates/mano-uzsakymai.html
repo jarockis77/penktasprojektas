@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+<img class="img-fluid rounded-circle" src="{{ user.profilis.nuotrauka.url }}" style="width: 150px; height: 150px;"/>
+<p class="text-primary">{{ user.username }}</p>
+<p class="text-secondary">{{ user.email }}</p>
 <h1>Mano uzsakymai </h1>
 {% if modelisinstance_list %}
 <ul>
     {% for modelis_o in modelisinstance_list %}
+        <li class=" {% if modelis_o.planuojama_gauti %}text-danger{% endif %}">
+        <a href="{% url 'modelis-vienas-url' modelis_o.modelis.id %}">
         <li>{{ modelis_o.modelis }}  --  <strong>{{ modelis_o.modelis.gamintojas }}</strong></li>
     {% endfor%}
 
