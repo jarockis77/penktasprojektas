@@ -57,9 +57,6 @@ def gamintojas(request, gamintojas_id):
     return render(request, 'gamintojas_vienas.html', context=context_t)
 
 
-
-
-
 class ModelisListView(generic.ListView):
     model = Modelis
     context_object_name = 'modelis_list'

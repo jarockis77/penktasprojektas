@@ -5,31 +5,31 @@
 <p class="text-light bg-warning">{{ modelis.gamintojas }}</p>
 <p><a href="{% url 'modelis-vienas-url' modelis.id %}"></a>
 <p> Aprasymas: {{ modelis.modelis_aprasymas | safe }}</p>
-<img src="{{ modelis.cover.url }}">
+<img src="{{ modelis.cover.url }}" width="1000" height="800">
 <p><strong>Likutis:</strong> {{ modelis.likutis.all|join:", " }}</p>
 <hr/>
 {% if modelis.modelisinstance_set.all %}
 <h4>Modeliu vienetai:</h4>
-    {% for copy in modelis.modelisinstance_set.all %}
-<p><strong>Planuojamas parvezimas:  </strong>{{ copy.planuojama_gauti }}</p>
+{% for copy in modelis.modelisinstance_set.all %}
+<p><strong>Planuojamas parvezimas: </strong>{{ copy.planuojama_gauti }}</p>
 <p><strong>Nr: </strong>{{ copy.id }}</p>
-    <p class="{% if copy.status == 'n' %} text-danger
+<p class="{% if copy.status == 'n' %} text-danger
               {% elif copy.status == 't' %} text-success
               {% elif copy.status == 'r' %} text-muted
               {% else %} text-warning
               {% endif %}">
-        <strong>{{ copy.get_status_display }}</strong></p>
+    <strong>{{ copy.get_status_display }}</strong></p>
 
 
-    {% endfor %}
+{% endfor %}
 {% else %}
-    <p>Kolkas tokio modelio neturime... </p>
+<p>Kolkas tokio modelio neturime... </p>
 {% endif %}
 <hr/>
 {% if user.is_authenticated %}
 <div class="fieldWrapper">
     <h4>Palikite atsiliepima:</h4>
-    <form action="", method="post">
+    <form action=""  method="post">
         {% csrf_token %}
         {{ form.content }}
         <input type="submit" value="Issaugoti">
@@ -39,16 +39,17 @@
 
 <hr/>
 <h4>Atsiliepimai: </h4>
-    {% if modelis.modelisreview_set.all %}
-        {% for review_o in modelis.modelisreview_set.all %}
-            <hr/>
-    <img class="img-fluid rounded-circle" src="{{ review_o.reviewer.profilis.nuotrauka.url }}" style="width: 50px; height: 50px;"/>
-        <p class="bg-light"><em><strong>{{ review_o.reviewer }}</strong> {{ review_o.date_created }}</em></p>
-            
-            <p>{{ review_o.content }}</p>
-        {% endfor %}
-    {% else %}
-        <p>modelis atsiliepimu neturi...</p>
-    {% endif %}
+{% if modelis.modelisreview_set.all %}
+{% for review_o in modelis.modelisreview_set.all %}
+<hr/>
+<img class="img-fluid rounded-circle" src="{{ review_o.reviewer.profilis.nuotrauka.url }}"
+     style="width: 50px; height: 50px;"/>
+<p class="bg-light"><em><strong>{{ review_o.reviewer }}</strong> {{ review_o.date_created }}</em></p>
+
+<p>{{ review_o.content }}</p>
+{% endfor %}
+{% else %}
+<p>modelis atsiliepimu neturi...</p>
+{% endif %}
 
 {% endblock %}

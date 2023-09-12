@@ -6,4 +6,4 @@ class MotociklaiConfig(AppConfig):
     name = 'motociklai'
 
     def ready(self):
-        from.signals import create_profile
+        from .signals import create_profile

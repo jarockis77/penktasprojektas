@@ -26,9 +26,9 @@
     <div class="col-sm-5 col-md-4 d-flex align-items-stretch">
         <div class="card mb-4 shadow-sm">
             {% if modelis_o.cover %}
-            <img src="{{ modelis_o.cover.url }}" class="card-img-top">
+            <img src="{{ modelis_o.cover.url }}" width="345" height="300">
             {% else %}
-            <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            <img src="{% static 'img/no-image.png' %}" width="345" height="300">
             {% endif %}
             <div class="card-body">
                 <h6 class="card-subtitle mb-3 text-muted">{{ modelis_o.gamintojas }}</h6>

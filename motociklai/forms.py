@@ -1,6 +1,5 @@
-from .models import ModelisReview,User, Profilis
+from .models import ModelisReview, User, Profilis
 from django import forms
-
 
 
 class ModelisReviewForm(forms.ModelForm):
@@ -11,6 +10,7 @@ class ModelisReviewForm(forms.ModelForm):
             'modelis': forms.HiddenInput(),
             'reviewer': forms.HiddenInput()
         }
+
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()

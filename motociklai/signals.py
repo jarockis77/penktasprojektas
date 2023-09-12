@@ -12,4 +12,3 @@ def create_profile(sender,
                    ):
     if created:
         Profilis.objects.create(user=instance)
-
