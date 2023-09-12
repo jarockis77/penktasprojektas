@@ -1,16 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
-
+from django.urls import reverse
 
 from datetime import date
 import uuid
 from PIL import Image
+
+
 # Create your models here.
 
 class Gamintojas(models.Model):
     pavadinimas = models.CharField('Pavadinimas', max_length=50)
-    gaminimo_pradzia = models.IntegerField('Pradejo-gaminti', max_length=20)
+    gaminimo_pradzia = models.IntegerField('Pradejo-gaminti')
     aprasymas = HTMLField()
 
     class Meta:
@@ -26,17 +28,17 @@ class Gamintojas(models.Model):
 
     display_modeliai.short_description = "Modeliai"
 
-
+    def get_absolute_url(self):
+        return reverse('gamintojas-vienas-url', args=[str(self.id)])
 
 
 class Modelis(models.Model):
     modelis = models.CharField('Modelis', max_length=50)
     metai_pasirode = models.IntegerField('Gaminimo-pradzia')
-    modelis_aprasymas = models.TextField('Aprasymas', max_length=3000, null=True)
+    modelis_aprasymas = HTMLField()
     gamintojas = models.ForeignKey('Gamintojas', on_delete=models.SET_NULL, null=True, related_name='modeliai')
     likutis = models.ManyToManyField('Likutis', help_text="Isrinkite likucio bukle")
-    cover =  models.ImageField('Virselis', upload_to='covers', null=True, blank=True)
-
+    cover = models.ImageField('Virselis', upload_to='covers', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Modelis'
@@ -50,6 +52,9 @@ class Modelis(models.Model):
 
     display_likutis.short_description = "Likutis"
 
+    def get_absolute_url(self):
+        return reverse('modelis-vienas-url', args=[str(self.id)])
+
 
 class Likutis(models.Model):
     name = models.CharField('Pavadinimas', max_length=20, help_text="sukurkite likucio info")
@@ -62,12 +67,10 @@ class Likutis(models.Model):
         return self.name
 
 
-
-
 class ModelisInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     modelis = models.ForeignKey('Modelis', on_delete=models.CASCADE, related_name='modelisinstance_set')
-    planuojama_gauti = models.DateField('Turesime pardavime', null=True, blank=True )
+    planuojama_gauti = models.DateField('Turesime pardavime', null=True, blank=True)
 
     LIKUCIU_STATUS = (
         ('t', 'Turime sandelyje'),
@@ -78,8 +81,8 @@ class ModelisInstance(models.Model):
 
     status = models.CharField(
         max_length=1,
-        choices = LIKUCIU_STATUS,
-        blank = True,
+        choices=LIKUCIU_STATUS,
+        blank=True,
         default='a',
         help_text='Moto statusas'
     )
@@ -88,7 +91,7 @@ class ModelisInstance(models.Model):
 
     @property
     def is_overdue(self):
-        if self.due_back and date.today() > self.due_back:
+        if self.planuojama_gauti and date.today() > self.planuojama_gauti:
             return True
         else:
             return False
@@ -97,15 +100,15 @@ class ModelisInstance(models.Model):
         ordering = ['planuojama_gauti']
 
     def __str__(self):
-        #return f"{self.id} -- {self.modelis.modelis} -- {self.modelis.gamintojas}"
+        # return f"{self.id} -- {self.modelis.modelis} -- {self.modelis.gamintojas}"
         return f"{self.id}"
+
 
 class ModelisReview(models.Model):
     content = models.TextField('Atsiliepimas', max_length=2000)
     date_created = models.DateTimeField(auto_now_add=True)
     modelis = models.ForeignKey(Modelis, on_delete=models.CASCADE, related_name='modelisreview_set', blank=True)
     reviewer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-
 
     def __str__(self):
         return self.content

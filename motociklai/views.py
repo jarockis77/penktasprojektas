@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-#from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.views import generic
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -9,8 +9,10 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .models import Gamintojas, Modelis, Likutis, ModelisInstance
+from .models import Gamintojas, Modelis, ModelisInstance
 from .forms import ModelisReviewForm, UserUpdateForm, ProfilisUpdateForm
+
+
 # Create your views here.
 
 
@@ -55,6 +57,9 @@ def gamintojas(request, gamintojas_id):
     return render(request, 'gamintojas_vienas.html', context=context_t)
 
 
+
+
+
 class ModelisListView(generic.ListView):
     model = Modelis
     context_object_name = 'modelis_list'
@@ -84,10 +89,6 @@ class ModelisDetailView(generic.edit.FormMixin, generic.DetailView):
         form.instance.reviewer = self.request.user
         form.save()
         return super().form_valid(form)
-
-
-
-
 
 
 def search(request):
@@ -148,14 +149,13 @@ def profilis(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfilisUpdateForm(instance=request.user.profilis)
     elif request.method == "POST":
-        u_form = UserUpdateForm(request.POST,instance=request.user)
+        u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfilisUpdateForm(request.POST, request.FILES, instance=request.user.profilis)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
             messages.success(request, ("Your profile was updated"))
             return redirect('profilis-url')
-
     context_t = {
         'u_form': u_form,
         'p_form': p_form

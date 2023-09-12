@@ -4,7 +4,7 @@
 <h1>{{modelis.modelis}}</h1>
 <p class="text-light bg-warning">{{ modelis.gamintojas }}</p>
 <p><a href="{% url 'modelis-vienas-url' modelis.id %}"></a>
-<p><strong>Aprasymas:</strong></p> {{ modelis.modelis_aprasymas }}</p>
+<p> Aprasymas: {{ modelis.modelis_aprasymas | safe }}</p>
 <img src="{{ modelis.cover.url }}">
 <p><strong>Likutis:</strong> {{ modelis.likutis.all|join:", " }}</p>
 <hr/>

@@ -8,9 +8,10 @@
 {% if modelisinstance_list %}
 <ul>
     {% for modelis_o in modelisinstance_list %}
-        <li class=" {% if modelis_o.planuojama_gauti %}text-danger{% endif %}">
+
         <a href="{% url 'modelis-vienas-url' modelis_o.modelis.id %}">
         <li>{{ modelis_o.modelis }}  --  <strong>{{ modelis_o.modelis.gamintojas }}</strong></li>
+        </a>
     {% endfor%}
 
 

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h4> {{ gamintojas_viena_eilute_t.pavadinimas }} - {{ gamintojas_viena_eilute_t.metai }}</h4>
+<h4> {{ gamintojas_viena_eilute_t.pavadinimas }}</h4>
 <hr/>
 <p> Aprasymas: {{ gamintojas_viena_eilute_t.aprasymas | safe }} </p>
 <hr/>
@@ -9,6 +9,4 @@
 {% for modelis in gamintojas_viena_eilute_t.modeliai.all %}
     <li><a class="text-warning bg-dark" href="{% url 'modelis-vienas-url' modelis.id %}"> {{ modelis.modelis }}</a></li>
 {% endfor %}
-
-
 {% endblock %}
