@@ -5,7 +5,7 @@
 <p class="text-light bg-warning">{{ modelis.gamintojas }}</p>
 <p><a href="{% url 'modelis-vienas-url' modelis.id %}"></a>
 <p> Aprasymas: {{ modelis.modelis_aprasymas | safe }}</p>
-<img src="{{ modelis.cover.url }}" width="1000" height="800">
+<img src="{{ modelis.cover.url }}" width="1175" height="800">
 <p><strong>Likutis:</strong> {{ modelis.likutis.all|join:", " }}</p>
 <hr/>
 {% if modelis.modelisinstance_set.all %}
