@@ -37,7 +37,7 @@ class Modelis(models.Model):
     metai_pasirode = models.IntegerField('Gaminimo-pradzia')
     modelis_aprasymas = HTMLField()
     gamintojas = models.ForeignKey('Gamintojas', on_delete=models.SET_NULL, null=True, related_name='modeliai')
-    likutis = models.ManyToManyField('Likutis', help_text="Isrinkite likucio bukle")
+    likutis = models.ManyToManyField('Likutis', help_text="Issirinkite likucio bukle")
     cover = models.ImageField('Virselis', upload_to='covers', null=True, blank=True)
 
     class Meta:
@@ -132,3 +132,18 @@ class Profilis(models.Model):
     class Meta:
         verbose_name = 'Profilis'
         verbose_name_plural = 'Profiliai'
+
+# import qrcode
+#
+# qr = qrcode.QRCode(
+#     version=1,
+#     error_correction=qrcode.constants.ERROR_CORRECT_L,
+#     box_size=10,
+#     border=4,
+# )
+# qr.add_data('https://www.youtube.com/watch?v=-OKJxbei7Xk')
+# qr.make(fit=True)
+#
+# img = qr.make_image(fill_color="black", back_color="white")
+# img.save('media/covers/myQRcode.png')
+# img.show()
